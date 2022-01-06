@@ -32,7 +32,7 @@ namespace WpfApp1
         private Company c_department;
         private string c_position;
 
-
+        
         public Employee(string name, int salary, double experience, Company department, string position)
         {
             c_name = name;
@@ -50,21 +50,7 @@ namespace WpfApp1
             }
             set
             {
-                if (value != Name)
-                {
-                    if (!string.IsNullOrWhiteSpace(value))
-                    {
-                        Name = value;
-                    }
-                    else if (value == null)
-                    {
-                        throw new ArgumentNullException($"{nameof(Name)} не может быть null", nameof(Name));
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"{nameof(Name)} не может быть пустой или содержать только пробелы", nameof(Name));
-                    }
-                }
+                
             }
         }
         public int Salary
@@ -75,7 +61,7 @@ namespace WpfApp1
             }
             set
             {
-               
+              
             }
         }
 
@@ -98,7 +84,7 @@ namespace WpfApp1
             }
             set
             {
-
+                
             }
         }
         public string Position
@@ -114,6 +100,7 @@ namespace WpfApp1
         }
 
     };
+
 
     public class Principal : Employee
     {
@@ -158,7 +145,6 @@ namespace WpfApp1
     {
 
      
-
         List<Employee> Atmoslayerion = new List<Employee>();
         string[] Splitter = { " ", ";", "/",".",":"};
 
@@ -188,9 +174,16 @@ namespace WpfApp1
                     quantity++;
                 }
             }
-            result = salarysum / quantity;
-            result = Math.Round(result, 3);
-            Tb1.Text = $"Средняя зарплата в отделe {Department}: {result} \n";
+            if (quantity == 0)
+            {
+                Tb1.Text = "Работников в отделе нет \n";
+            }
+            else
+            {
+                result = salarysum / quantity;
+                result = Math.Round(result, 3);
+                Tb1.Text = $"Средняя зарплата в отделe {Department}: {result} \n";
+            }
         }
 
         public void ExperienceSum(List<Employee> Ink)
@@ -205,9 +198,16 @@ namespace WpfApp1
                 experiencesum += Ink[i].Experience;
                 quantity++;
             }
-            result = experiencesum / quantity;
-            result = Math.Round(result, 3);
-            Tb1.Text = $"Средний опыт работы в компании: {result} \n";
+            if (quantity == 0)
+            {
+                Tb1.Text = "Работников в отделе нет \n";
+            }
+            else
+            {
+                result = experiencesum / quantity;
+                result = Math.Round(result, 3);
+                Tb1.Text = $"Средний опыт работы в компании: {result} \n";
+            }
         }
 
 
@@ -384,7 +384,7 @@ namespace WpfApp1
                 }
 
             }
-            catch (Exception ex)
+            catch 
             {
                 Tb1.Text = "Ошибка во ведённых значениях";
                 Tb2.Text = "";
